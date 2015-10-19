@@ -7,12 +7,19 @@ localhost like this:
 
     ansible-role -i localhost, testrole
 
-The `ansible-role` script accepts the following options:
+The following options are unique to the `ansible-role` command:
 
-- `--inventory`, `-i` *inventory* -- Like the corresponding `ansible`
-  option
-- `--extra-vars, `-e` *vars* -- Like the corresponding `ansible` option
 - `--hosts`, `-h` *hosts*  -- The value of this argument will be applied
   to the `hosts:` line in the generated playbook.  Defaults to `all`.
 - `--gather`, `-g` -- Enable fact gathering (this is the default)
 - `--no-gather`, `-G` -- Disable fact gathering
+
+The following additional options are simply proxies to the equivalent
+`ansible-playbook` options:
+
+- `--verbose`, `-v`
+- `--sudo`, `-s`
+- `--become`, `-b`
+- `--user`, `-u` *user*
+- `--inventory`, `-i` *inventory*
+- `--extra-vars`, `-e` *vars*

@@ -44,7 +44,7 @@ def parse_args():
                    dest='become')
     g.add_argument('--become', '-b',
                    action='store_true')
-    g.add_argument('--remote-user', '-u')
+    g.add_argument('--user', '-u')
 
     p.add_argument('role')
 
@@ -73,8 +73,8 @@ def main():
         if args.become:
             cmdvec.append('-b')
 
-        if args.remote_user:
-            cmdvec.extend(('-u', args.remote_user))
+        if args.user:
+            cmdvec.extend(('-u', args.user))
 
         for i in range(args.verbose):
             cmdvec.append('-v')
