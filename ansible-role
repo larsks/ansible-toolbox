@@ -28,6 +28,7 @@ def parse_args():
     p.add_argument('--extra-vars', '-e',
                    action='append',
                    default=[])
+    p.add_argument('--connection', '-c')
 
     g = p.add_argument_group('Inventory')
     g.add_argument('-i', '--inventory')
@@ -71,6 +72,9 @@ def main():
 
         if args.user:
             cmdvec.extend(('-u', args.user))
+
+        if args.connection:
+            cmdvec.extend(('-c', args.connection))
 
         for i in range(args.verbose):
             cmdvec.append('-v')
