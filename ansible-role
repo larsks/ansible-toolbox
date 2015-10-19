@@ -21,37 +21,38 @@ role_playbook='''---
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument('--verbose', '-v',
-                   action='store_const',
-                   const='INFO',
-                   dest='loglevel')
-    p.add_argument('--debug', '-d',
-                   action='store_const',
-                   const='DEBUG',
-                   dest='loglevel')
+                   action='count')
 
-    p.add_argument('-i', '--inventory')
     p.add_argument('--gather', '-g',
                    action='store_true')
     p.add_argument('--no-gather', '-G',
                    action='store_false',
                    dest='gather')
-    p.add_argument('--hosts', '-H',
-                   default='all')
     p.add_argument('--extra-vars', '-e',
                    action='append',
                    default=[])
 
+    g = p.add_argument_group('Inventory')
+    g.add_argument('-i', '--inventory')
+    g.add_argument('--hosts', '-H',
+                   default='all')
+
+    g = p.add_argument_group('Identity')
+    g.add_argument('--sudo', '-s',
+                   action='store_true',
+                   dest='become')
+    g.add_argument('--become', '-b',
+                   action='store_true')
+    g.add_argument('--remote-user', '-u')
+
     p.add_argument('role')
 
-    p.set_defaults(loglevel='WARN', gather=True)
+    p.set_defaults(gather=True)
     return p.parse_args()
 
 
 def main():
     args = parse_args()
-    logging.basicConfig(
-        level=args.loglevel)
-
     template = jinja2.Template(role_playbook)
 
     with tempfile.NamedTemporaryFile(dir='.') as fd:
@@ -66,7 +67,16 @@ def main():
         ap_args = [('-e', x) for x in args.extra_vars]
         cmdvec = ['ansible-playbook', fd.name]
         if args.inventory:
-            cmdvec.extend(['-i', args.inventory])
+            cmdvec.extend(('-i', args.inventory))
+
+        if args.become:
+            cmdvec.append('-b')
+
+        if args.remote_user:
+            cmdvec.extend(('-u', args.remote_user))
+
+        for i in range(args.verbose):
+            cmdvec.append('-v')
 
         for arg in ap_args:
             cmdvec.extend(arg)
