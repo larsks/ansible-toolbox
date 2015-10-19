@@ -21,7 +21,8 @@ role_playbook='''---
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument('--verbose', '-v',
-                   action='count')
+                   action='count',
+                   default=0)
 
     p.add_argument('--gather', '-g',
                    action='store_true')
