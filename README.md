@@ -23,3 +23,12 @@ The following additional options are simply proxies to the equivalent
 - `--user`, `-u` *user*
 - `--inventory`, `-i` *inventory*
 - `--extra-vars`, `-e` *vars*
+
+## Installation
+
+You can run:
+
+    python setup.py install
+
+Or you can just copy the `ansible-role` script somewhere and make sure
+it is executable.
