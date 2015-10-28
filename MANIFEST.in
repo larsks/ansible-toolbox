@@ -1,0 +1,2 @@
+*.txt
+recursive-include ansible_toolbox *.yml
