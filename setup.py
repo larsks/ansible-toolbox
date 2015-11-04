@@ -14,5 +14,6 @@ with open('requirements.txt') as fd:
           entry_points={'console_scripts': [
               'ansible-role = ansible_toolbox.cmd.role:main',
               'ansible-task = ansible_toolbox.cmd.task:main',
+              'ansible-eval = ansible_toolbox.cmd.eval:main',
           ]},
           )
