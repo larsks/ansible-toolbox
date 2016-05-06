@@ -10,7 +10,7 @@ with open('requirements.txt') as fd:
           install_requires=fd.readlines(),
           packages=find_packages(),
           package_data={'ansible_toolbox': [
-              'ansible_toolbox/templates/*'
+              'templates/*'
           ]},
           entry_points={'console_scripts': [
               'ansible-role = ansible_toolbox.cmd.role:main',
