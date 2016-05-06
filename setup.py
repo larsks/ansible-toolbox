@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages
+from ansible_toolbox import __version__ as version
 
 with open('requirements.txt') as fd:
     setup(name='ansible-toolbox',
           author='Lars Kellogg-Stedman',
-          author_email='lars@redhat.com',
+          author_email='lars@oddbit.com',
           url='https://github.com/larsks/ansible-role',
-          version='1.0',
+          version=version,
           install_requires=fd.readlines(),
           packages=find_packages(),
           package_data={'ansible_toolbox': [
