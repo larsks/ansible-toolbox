@@ -38,6 +38,8 @@ class BaseApp (object):
         g.add_argument('--become', '-b',
                        action='store_true')
         g.add_argument('--user', '-u')
+        g.add_argument('--ask-become-pass', '-K',
+                       action='store_true')
 
         p.set_defaults(gather=True)
         return p
@@ -55,6 +57,9 @@ class BaseApp (object):
 
         if args.become:
             cmd.append('-b')
+            
+        if args.ask_become_pass:
+            cmd.append('-K')
 
         if args.user:
             cmd.extend(('-u', args.user))
