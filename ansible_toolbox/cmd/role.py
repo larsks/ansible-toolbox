@@ -26,8 +26,7 @@ class RoleApp (BaseApp):
 
         return cmd
 
-    def main(self):
-        args = self.parse_args()
+    def main(self, args):
         template = self.get_template('role.yml')
 
         with tempfile.NamedTemporaryFile(dir='.') as fd:
@@ -43,6 +42,8 @@ class RoleApp (BaseApp):
             cmd.extend(self.build_command_line(args))
             subprocess.check_call(cmd)
 
+app = RoleApp()
+
 
 def main():
-    RoleApp().main()
+    app.run()

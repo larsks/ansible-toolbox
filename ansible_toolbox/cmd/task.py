@@ -17,8 +17,7 @@ class TaskApp (BaseApp):
         p.add_argument('tasklist')
         return p
 
-    def main(self):
-        args = self.parse_args()
+    def main(self, args):
         template = self.get_template('tasklist.yml')
         version = self.probe_ansible_version()
 
@@ -41,6 +40,8 @@ class TaskApp (BaseApp):
             cmd.extend(self.build_command_line(args))
             subprocess.check_call(cmd)
 
+app = TaskApp()
+
 
 def main():
-    TaskApp().main()
+    app.run()

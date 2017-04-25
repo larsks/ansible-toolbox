@@ -33,8 +33,7 @@ class EvalApp (BaseApp):
         p.add_argument('expr')
         return p
 
-    def main(self):
-        args = self.parse_args()
+    def main(self, args):
         template = self.get_template('eval.yml')
 
         with tempfile.NamedTemporaryFile(dir='.') as tmplfd, \
@@ -55,6 +54,8 @@ class EvalApp (BaseApp):
                 sys.stdout.write(fd.read())
                 sys.stdout.write('\n')
 
+app = EvalApp()
+
 
 def main():
-    EvalApp().main()
+    app.run()

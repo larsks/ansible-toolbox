@@ -1,7 +1,9 @@
 import argparse
 import jinja2
 import jinja2.loaders
+import os
 import subprocess
+import sys
 
 
 class BaseApp (object):
@@ -91,3 +93,19 @@ class BaseApp (object):
         out = subprocess.check_output(['ansible-playbook', '--version'])
         version = out.decode('utf-8').splitlines()[0].split()[1]
         return tuple(int(x) for x in version.split('.'))
+
+    def run(self):
+        args = self.parse_args()
+        res = 0
+        os.environ["ANSIBLE_RETRY_FILES_ENABLED"] = "False"
+
+        try:
+            self.main(args)
+        except subprocess.CalledProcessError as err:
+            res = err.returncode
+            if err.output:
+                sys.stdout.write(err.output)
+        except KeyboardInterrupt:
+            res = 1
+
+        sys.exit(res)
