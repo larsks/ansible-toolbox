@@ -13,7 +13,16 @@ class App (BaseApp):
     def build_argument_parser(self):
         p = super(App, self).build_argument_parser()
         p.add_argument('role')
+        p.add_argument('-t', '--tags')
         return p
+
+    def build_command_line(self, args):
+        cmd = super(App, self).build_argument_parser(args)
+
+        if args.tags:
+            cmd.extend(('-t', args.tags))
+
+        return cmd
 
     def main(self):
         args = self.parse_args()
