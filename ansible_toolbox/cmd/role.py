@@ -17,7 +17,7 @@ class App (BaseApp):
         return p
 
     def build_command_line(self, args):
-        cmd = super(App, self).build_argument_parser(args)
+        cmd = super(App, self).build_command_line(args)
 
         if args.tags:
             cmd.extend(('-t', args.tags))
