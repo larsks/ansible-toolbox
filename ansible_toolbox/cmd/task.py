@@ -24,7 +24,7 @@ class App (BaseApp):
                 tasklist=args.tasklist,
                 hosts=args.hosts,
                 gather=args.gather,
-            ))
+            ).encode('utf-8'))
 
             fd.flush()
 

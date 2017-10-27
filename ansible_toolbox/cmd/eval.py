@@ -25,7 +25,7 @@ class App (BaseApp):
                 expr=args.expr,
                 hosts=args.hosts,
                 gather=args.gather,
-            ))
+            ).encode('utf-8'))
 
             tmplfd.flush()
 

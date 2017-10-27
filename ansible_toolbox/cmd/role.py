@@ -24,7 +24,7 @@ class App (BaseApp):
                 role=args.role,
                 hosts=args.hosts,
                 gather=args.gather,
-            ))
+            ).encode('utf-8'))
 
             fd.flush()
 
