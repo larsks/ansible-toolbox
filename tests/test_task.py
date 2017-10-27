@@ -42,7 +42,7 @@ class TestTask(object):
         task2_file = 'task2.txt'
         task3_file = 'task3.txt'
 
-        subprocess.check_call(['ansible-task', tasklist])
+        subprocess.check_call(['ansible-task', '--debug', tasklist])
         assert os.path.exists(task2_file)
         assert os.path.exists(task3_file)
 
@@ -51,6 +51,6 @@ class TestTask(object):
         task2_file = 'task2.txt'
         task3_file = 'task3.txt'
 
-        subprocess.check_call(['ansible-task', tasklist, '-t', 'task2'])
+        subprocess.check_call(['ansible-task', '--debug', tasklist, '-t', 'task2'])
         assert os.path.exists(task2_file)
         assert not os.path.exists(task3_file)
