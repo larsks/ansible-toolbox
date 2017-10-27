@@ -1,6 +1,7 @@
 import argparse
 import jinja2
 import jinja2.loaders
+import logging
 import os
 import subprocess
 import sys
@@ -20,6 +21,8 @@ class BaseApp (object):
         p.add_argument('--verbose', '-v',
                        action='count',
                        default=0)
+        p.add_argument('--debug',
+                       action='store_true')
 
         p.add_argument('--gather', '-g',
                        action='store_true')
@@ -99,12 +102,15 @@ class BaseApp (object):
         res = 0
         os.environ["ANSIBLE_RETRY_FILES_ENABLED"] = "False"
 
+        logging.basicConfig(
+            level='DEBUG' if args.debug else 'INFO')
+
         try:
             self.main(args)
         except subprocess.CalledProcessError as err:
             res = err.returncode
             if err.output:
-                sys.stdout.write(err.output)
+                sys.stdout.write(err.output.decode('utf-8'))
         except KeyboardInterrupt:
             res = 1
 

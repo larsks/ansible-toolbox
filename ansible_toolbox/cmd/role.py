@@ -30,16 +30,19 @@ class RoleApp (BaseApp):
         template = self.get_template('role.yml')
 
         with tempfile.NamedTemporaryFile(dir='.') as fd:
-            fd.write(template.render(
+            playbook = template.render(
                 role=args.role,
                 hosts=args.hosts,
                 gather=args.gather,
-            ).encode('utf-8'))
+            )
 
+            LOG.debug('playbook: %s', playbook)
+            fd.write(playbook.encode('utf-8'))
             fd.flush()
 
             cmd = ['ansible-playbook', fd.name]
             cmd.extend(self.build_command_line(args))
+            LOG.debug('running command: %s', cmd)
             subprocess.check_call(cmd)
 
 

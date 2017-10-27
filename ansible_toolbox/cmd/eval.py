@@ -36,19 +36,22 @@ class EvalApp (BaseApp):
     def main(self, args):
         template = self.get_template('eval.yml')
 
-        with tempfile.NamedTemporaryFile(dir='.') as tmplfd, \
+        with tempfile.NamedTemporaryFile(dir='.', suffix='.yml') as tmplfd, \
                 temporary_file(dir='.') as output:
-            tmplfd.write(template.render(
-                expr=args.expr,
-                hosts=args.hosts,
-                gather=args.gather,
-                output=output,
-            ).encode('utf-8'))
+            playbook = template.render(
+                    expr=args.expr,
+                    hosts=args.hosts,
+                    gather=args.gather,
+                    output=output,
+            )
 
+            LOG.debug('playbook: %s', playbook)
+            tmplfd.write(playbook.encode('utf-8'))
             tmplfd.flush()
 
             cmd = ['ansible-playbook', tmplfd.name]
             cmd.extend(self.build_command_line(args))
+            LOG.debug('running command: %s', cmd)
             subprocess.check_output(cmd)
             with open(output, 'r') as fd:
                 sys.stdout.write(fd.read())
