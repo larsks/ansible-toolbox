@@ -49,6 +49,7 @@ class TaskApp (BaseApp):
             cmd.extend(self.build_command_line(args))
             subprocess.check_call(cmd)
 
+
 app = TaskApp()
 
 
