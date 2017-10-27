@@ -1,17 +1,19 @@
 from __future__ import absolute_import
 
 import logging
-import tempfile
 import subprocess
+import tempfile
 
 from ansible_toolbox.base import BaseApp
 
 LOG = logging.getLogger(__name__)
 
 
-class App (BaseApp):
+class RoleApp (BaseApp):
+    '''Execute a single Ansible role.'''
+
     def build_argument_parser(self):
-        p = super(App, self).build_argument_parser()
+        p = super(RoleApp, self).build_argument_parser()
         p.add_argument('role')
         return p
 
@@ -34,4 +36,4 @@ class App (BaseApp):
 
 
 def main():
-    App().main()
+    RoleApp().main()

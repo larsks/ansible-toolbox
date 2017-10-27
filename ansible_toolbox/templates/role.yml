@@ -1,7 +1,7 @@
 ---
 # This playbook was generated automatically.
 
-- hosts: {{hosts}}
-  gather_facts: {{gather}}
+- hosts: {{ hosts }}
+  gather_facts: {{ gather }}
   roles:
-    - role: {{role}}
+    - role: {{ role }}

@@ -1,17 +1,19 @@
 from __future__ import absolute_import
 
 import logging
-import tempfile
 import subprocess
+import tempfile
 
 from ansible_toolbox.base import BaseApp
 
 LOG = logging.getLogger(__name__)
 
 
-class App (BaseApp):
+class TaskApp (BaseApp):
+    '''Execute an Ansible task list.'''
+
     def build_argument_parser(self):
-        p = super(App, self).build_argument_parser()
+        p = super(TaskApp, self).build_argument_parser()
         p.add_argument('tasklist')
         return p
 
@@ -41,4 +43,4 @@ class App (BaseApp):
 
 
 def main():
-    App().main()
+    TaskApp().main()

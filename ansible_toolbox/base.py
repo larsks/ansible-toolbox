@@ -60,7 +60,7 @@ class BaseApp (object):
 
         if args.become:
             cmd.append('-b')
-            
+
         if args.ask_become_pass:
             cmd.append('-K')
 
@@ -79,6 +79,11 @@ class BaseApp (object):
         return cmd
 
     def probe_ansible_version(self):
+        '''Return information about the installed version of Ansible.
+
+        We need to know the current Ansible version in order to avoid
+        deprecation warnings or other issues in our generated playbooks.
+        '''
         out = subprocess.check_output(['ansible-playbook', '--version'])
         version = out.decode('utf-8').splitlines()[0].split()[1]
         return tuple(int(x) for x in version.split('.'))

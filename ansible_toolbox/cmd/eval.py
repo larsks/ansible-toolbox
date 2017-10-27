@@ -14,14 +14,22 @@ LOG = logging.getLogger(__name__)
 
 @contextlib.contextmanager
 def temporary_file(*args, **kwargs):
+    '''Return a temporary filename.
+
+    Generate a temporary filename, return it to the caller, and clean it up
+    when done.  Unlike tempfile.NamedTemporaryFile and friends, you only get
+    back a filename rather than a file object.
+    '''
     name = tempfile.mktemp(*args, **kwargs)
     yield name
     os.unlink(name)
 
 
-class App (BaseApp):
+class EvalApp (BaseApp):
+    '''Evaluate a Jinja2 template and display the result.'''
+
     def build_argument_parser(self):
-        p = super(App, self).build_argument_parser()
+        p = super(EvalApp, self).build_argument_parser()
         p.add_argument('expr')
         return p
 
@@ -49,4 +57,4 @@ class App (BaseApp):
 
 
 def main():
-    App().main()
+    EvalApp().main()
