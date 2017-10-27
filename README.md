@@ -3,7 +3,9 @@ working with [Ansible][].
 
 [ansible]: http://ansible.com/
 
-## ansible-role
+## Commands
+
+### ansible-role
 
 The `ansible-role` script allows you to run a role from the command line.
 
@@ -15,7 +17,7 @@ this:
 This will target `localhost` by default, but you can use `--inventory`
 and `--host` to modify the target of the role.
 
-## ansible-task
+### ansible-task
 
 The `ansible-task` script allows you to run a task list directly from
 the command line.
@@ -24,7 +26,7 @@ If you have a tasklist `mytasks.yml`, you can run it like this:
 
     ansible-task mytasks.yml
 
-## ansible-eval
+### ansible-eval
 
 The `ansible-eval` script will return the result of evaluating a
 Jinja2 template with ansible.  For example, the result of running:
@@ -47,8 +49,6 @@ Of course, you can use filters to reformat that:
 
 ## Common options
 
-The following options are unique to these commands:
-
 - `--hosts`, `-H` *hosts*  -- The value of this argument will be applied
   to the `hosts:` line in the generated playbook.  Defaults to
   `localhost`.
@@ -67,6 +67,11 @@ The following additional options are simply proxies to the equivalent
 
 ## Installation
 
-You can run:
+You can install `ansible-toolbox` directly from GitHub like this:
 
-    python setup.py install
+    pip install git+https://github.com/larsks/ansible-toolbox
+
+If you have a copy of the repository, you can run:
+
+    cd ansible-toolbox
+    pip install .
