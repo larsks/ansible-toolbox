@@ -60,7 +60,7 @@ Of course, you can use filters to reformat that:
 The following additional options are simply proxies to the equivalent
 `ansible-playbook` options:
 
-- `--check', `-C`
+- `--check`, `-C`
 - `--verbose`, `-v`
 - `--sudo`, `-s`
 - `--become`, `-b`
@@ -78,3 +78,21 @@ If you have a copy of the repository, you can run:
 
     cd ansible-toolbox
     pip install .
+
+## License
+
+ansible-toolbox, a collection of ansible utilities  
+Copyright (C) 2017 Lars Kellogg-Stedman <lars@oddbit.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
