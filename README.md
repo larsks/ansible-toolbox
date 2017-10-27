@@ -58,6 +58,7 @@ Of course, you can use filters to reformat that:
 The following additional options are simply proxies to the equivalent
 `ansible-playbook` options:
 
+- `--check', `-C`
 - `--verbose`, `-v`
 - `--sudo`, `-s`
 - `--become`, `-b`

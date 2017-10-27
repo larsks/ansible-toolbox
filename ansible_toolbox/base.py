@@ -28,6 +28,7 @@ class BaseApp (object):
                        action='append',
                        default=[])
         p.add_argument('--connection', '-c')
+        p.add_argument('--check', '-C', action='store_true')
 
         g = p.add_argument_group('Inventory')
         g.add_argument('-i', '--inventory')
@@ -58,11 +59,14 @@ class BaseApp (object):
         if args.inventory:
             cmd.extend(('-i', args.inventory))
 
+        if args.check:
+            cmd.append('--check')
+
         if args.become:
-            cmd.append('-b')
+            cmd.append('--become')
 
         if args.ask_become_pass:
-            cmd.append('-K')
+            cmd.append('--ask-become-pass')
 
         if args.user:
             cmd.extend(('-u', args.user))
