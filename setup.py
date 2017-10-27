@@ -5,7 +5,7 @@ with open('requirements.txt') as fd:
     setup(name='ansible-toolbox',
           author='Lars Kellogg-Stedman',
           author_email='lars@oddbit.com',
-          url='https://github.com/larsks/ansible-role',
+          url='https://github.com/larsks/ansible-toolbox',
           version=version,
           install_requires=fd.readlines(),
           packages=find_packages(),
