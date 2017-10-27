@@ -14,8 +14,8 @@ class RoleApp (BaseApp):
 
     def build_argument_parser(self):
         p = super(RoleApp, self).build_argument_parser()
-        p.add_argument('role')
         p.add_argument('-t', '--tags')
+        p.add_argument('role')
         return p
 
     def build_command_line(self, args):

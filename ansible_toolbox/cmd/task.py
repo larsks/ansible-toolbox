@@ -14,8 +14,17 @@ class TaskApp (BaseApp):
 
     def build_argument_parser(self):
         p = super(TaskApp, self).build_argument_parser()
+        p.add_argument('-t', '--tags')
         p.add_argument('tasklist')
         return p
+
+    def build_command_line(self, args):
+        cmd = super(TaskApp, self).build_command_line(args)
+
+        if args.tags:
+            cmd.extend(('-t', args.tags))
+
+        return cmd
 
     def main(self, args):
         template = self.get_template('tasklist.yml')
