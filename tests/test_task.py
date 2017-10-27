@@ -1,7 +1,7 @@
 import os
-import shutil
 import subprocess
-import tempfile
+
+from common import BaseTestCase
 
 task_content = '''---
 - name: test task 1
@@ -24,18 +24,12 @@ task_content = '''---
 '''
 
 
-class TestTask(object):
-    def setup_method(self):
-        self.workdir = tempfile.mkdtemp(prefix='test')
-        self.origdir = os.path.abspath(os.getcwd())
-        os.chdir(self.workdir)
+class TestTask(BaseTestCase):
+    def setup_method(self, method):
+        super(TestTask, self).setup_method(method)
 
         with open('tasklist.yml', 'wb') as fd:
             fd.write(task_content.encode('utf-8'))
-
-    def teardown_method(self):
-        os.chdir(self.origdir)
-        shutil.rmtree(self.workdir)
 
     def test_task(self):
         tasklist = 'tasklist.yml'
@@ -51,6 +45,7 @@ class TestTask(object):
         task2_file = 'task2.txt'
         task3_file = 'task3.txt'
 
-        subprocess.check_call(['ansible-task', '--debug', tasklist, '-t', 'task2'])
+        subprocess.check_call(['ansible-task', '--debug', tasklist,
+                               '-t', 'task2'])
         assert os.path.exists(task2_file)
         assert not os.path.exists(task3_file)

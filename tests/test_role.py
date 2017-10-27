@@ -1,7 +1,7 @@
 import os
-import shutil
 import subprocess
-import tempfile
+
+from common import BaseTestCase
 
 task_content = '''---
 - name: test task 1
@@ -24,19 +24,12 @@ task_content = '''---
 '''
 
 
-class TestTask(object):
-    def setup_method(self):
-        self.workdir = tempfile.mkdtemp(prefix='test')
-        self.origdir = os.path.abspath(os.getcwd())
-        os.chdir(self.workdir)
-
+class TestRole(BaseTestCase):
+    def setup_method(self, method):
+        super(TestRole, self).setup_method(method)
         os.makedirs('roles/testrole/tasks')
         with open('roles/testrole/tasks/main.yml', 'wb') as fd:
             fd.write(task_content.encode('utf-8'))
-
-    def teardown_method(self):
-        os.chdir(self.origdir)
-        shutil.rmtree(self.workdir)
 
     def test_role(self):
         task2_file = 'task2.txt'
