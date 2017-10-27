@@ -1,6 +1,8 @@
 This repository contains a collection of tools that I find useful in
 working with [Ansible][].
 
+![Build status](https://travis-ci.org/larsks/ansible-toolbox.svg?branch=master)
+
 [ansible]: http://ansible.com/
 
 ## Commands
