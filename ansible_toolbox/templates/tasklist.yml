@@ -4,4 +4,4 @@
 - hosts: {{hosts}}
   gather_facts: {{gather}}
   tasks:
-    - include: {{tasklist}}
+    - {{ include_action }}: "{{ tasklist }}"

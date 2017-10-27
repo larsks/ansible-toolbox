@@ -1,11 +1,14 @@
 import argparse
 import jinja2
 import jinja2.loaders
+import subprocess
+
 
 class BaseApp (object):
     def __init__(self):
         self._env = jinja2.Environment(
-            loader=jinja2.loaders.PackageLoader('ansible_toolbox', 'templates'))
+            loader=jinja2.loaders.PackageLoader('ansible_toolbox',
+                                                'templates'))
 
     def get_template(self, template):
         return self._env.get_template(template)
@@ -75,3 +78,7 @@ class BaseApp (object):
 
         return cmd
 
+    def probe_ansible_version(self):
+        out = subprocess.check_output(['ansible-playbook', '--version'])
+        version = out.decode('utf-8').splitlines()[0].split()[1]
+        return tuple(int(x) for x in version.split('.'))
