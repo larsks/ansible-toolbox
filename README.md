@@ -33,14 +33,16 @@ Jinja2 template with ansible.  For example, the result of running:
 
 Might look something like:
 
-    TASK [debug] *******************************************************************
-    ok: [localhost] => {
-        "msg": {
-            "address": "192.168.1.74", 
-            "broadcast": "192.168.1.255", 
-            "netmask": "255.255.255.0", 
-            "network": "192.168.1.0"
-        }
+    {"broadcast": "192.168.1.255", "netmask": "255.255.255.0", "network": "192.168.1.0", "address": "192.168.1.74"}
+
+Of course, you can use filters to reformat that:
+
+    $ ansible-eval '{{ ansible_eth0.ipv4 | to_nice_json }}'
+    {
+        "address": "192.168.1.74",
+        "broadcast": "192.168.1.255",
+        "netmask": "255.255.255.0",
+        "network": "192.168.1.0"
     }
 
 ## Common options

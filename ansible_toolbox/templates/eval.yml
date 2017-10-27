@@ -4,5 +4,6 @@
 - hosts: {{hosts}}
   gather_facts: {{gather}}
   tasks:
-    - debug:
-        msg: "{{expr}}"
+    - copy:
+        content: "{{expr}}"
+        dest: "{{ output }}"
