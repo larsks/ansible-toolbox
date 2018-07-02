@@ -36,8 +36,8 @@ class EvalApp (BaseApp):
     def main(self, args):
         template = self.get_template('eval.yml')
 
-        with tempfile.NamedTemporaryFile(dir='.', suffix='.yml') as tmplfd, \
-                temporary_file(dir='.') as output:
+        with tempfile.NamedTemporaryFile(suffix='.yml') as tmplfd, \
+                temporary_file(suffix='.output') as output:
             playbook = template.render(
                     expr=args.expr,
                     hosts=args.hosts,

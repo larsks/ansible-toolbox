@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import logging
+import os
 import subprocess
 import tempfile
 
@@ -39,9 +40,11 @@ class TaskApp (BaseApp):
         else:
             include_action = 'include'
 
-        with tempfile.NamedTemporaryFile(dir='.') as fd:
+        tasklist = os.path.abspath(args.tasklist)
+
+        with tempfile.NamedTemporaryFile() as fd:
             playbook = template.render(
-                tasklist=args.tasklist,
+                tasklist=tasklist,
                 hosts=args.hosts,
                 gather=args.gather,
                 include_action=include_action

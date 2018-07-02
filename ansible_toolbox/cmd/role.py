@@ -33,7 +33,7 @@ class RoleApp (BaseApp):
     def main(self, args):
         template = self.get_template('role.yml')
 
-        with tempfile.NamedTemporaryFile(dir='.') as fd:
+        with tempfile.NamedTemporaryFile() as fd:
             playbook = template.render(
                 role=args.role,
                 hosts=args.hosts,
