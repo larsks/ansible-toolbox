@@ -67,6 +67,8 @@ The following additional options are simply proxies to the equivalent
 - `--user`, `-u` *user*
 - `--inventory`, `-i` *inventory*
 - `--extra-vars`, `-e` *vars*
+- `--tags`, `-t` *tags*
+- `--skip-tags` *tags*
 
 ## Installation
 

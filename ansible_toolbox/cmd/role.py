@@ -15,6 +15,7 @@ class RoleApp (BaseApp):
     def build_argument_parser(self):
         p = super(RoleApp, self).build_argument_parser()
         p.add_argument('-t', '--tags')
+        p.add_argument('--skip-tags')
         p.add_argument('role')
         return p
 
@@ -23,6 +24,9 @@ class RoleApp (BaseApp):
 
         if args.tags:
             cmd.extend(('-t', args.tags))
+
+        if args.skip_tags:
+            cmd.extend(('--skip-tags', args.skip_tags))
 
         return cmd
 
